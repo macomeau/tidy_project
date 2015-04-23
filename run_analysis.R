@@ -4,8 +4,8 @@ if (!require("data.table")) {
 require("data.table")
 
 fileName = "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
-#download.file(fileName, 'data.zip', method = 'curl')
-#unzip('data.zip')
+download.file(fileName, 'data.zip', method = 'curl')
+unzip('data.zip')
 
 # Get Activity Labels
 activity_labels = read.table("./UCI HAR Dataset//activity_labels.txt")
@@ -51,4 +51,4 @@ big_data_sd = sapply(big_data, sd, na.rm=TRUE)
 # Tidy Data
 data_table = data.table(big_data)
 tidy_data = data_table[, lapply(.SD,mean), by='Activity,Subject']
-write.table(tidy_data,file="tidy_data.txt",sep=",",row.names = FALSE)
+write.table(tidy_data,file="tidy_data.csv",sep=",",row.names = FALSE)
